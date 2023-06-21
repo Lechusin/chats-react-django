@@ -6,6 +6,7 @@ export const MessageS = ({msg=''}) => {
       <div className="messageContent rounded border border-primary">
         <p className='p-2' > {msg} </p>
       </div>
+      
     </div>
   )
 }

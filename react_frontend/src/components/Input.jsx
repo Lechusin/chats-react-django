@@ -7,6 +7,7 @@ export const Input = () => {
       <div className="send p-2">
         <button className='btn btn-dark border borde-light p-2'>Enviar</button>
       </div>
+      
     </div>
   )
 }

@@ -13,6 +13,7 @@ export const Chats = () => {
           <span>Juan</span>
         </div>
       </div>
+      
     </div>
     
   )

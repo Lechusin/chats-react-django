@@ -8,5 +8,6 @@ export const Messages = () => {
         <MessageS msg='hola'/>
         <MessageR msg=' como estasf dgdgf dsdhfgdf fhdh fgdggf gfhghf'/>
     </div>
+    
   )
 }

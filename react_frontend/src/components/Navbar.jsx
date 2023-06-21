@@ -13,6 +13,8 @@ export const Navbar = () => {
         <span className='p-2 text-sm'>LUIS</span>
         <button className='btn btn-dark border border-light' onClick={logOut}>Cerrar Sesión</button>
       </div>
+      
     </div>
+
   )
 }
