@@ -1,0 +1,78 @@
+
+.forma{
+    height: 100vh;
+    .cont{
+        height: auto;
+        width: 450px;
+        .fromWrapper{
+            height: 100%;
+            width: 100%;
+            form{
+                height: 50%;
+                width: 80%; 
+                
+            }
+        }
+    }
+}
+
+
+.home {
+    height: 100vh;
+    .cont{
+        height: 95%; 
+        width: 95%; 
+    }
+
+    .sidebar{
+        flex: 1;
+
+        .navbar{
+
+            .logo{
+                color: white;
+            }
+        }
+
+        .search{
+            .searchForm{
+                input{
+                    width: 100%;
+                    outline: none;
+                }
+            }
+        }
+
+        .chats{
+            .userChat{
+                width: 100%; 
+            }
+        }
+    }
+    .chat{
+        flex: 2;
+        .chatInfo{
+            height: 40px; 
+            padding:10px;
+        }
+        .messages{
+            height: calc(100% - 110px);
+            .message{
+                width: 100%;
+                .messageContent{
+                    width: 90%;
+                }
+            }
+        }
+
+        .input{
+            height: 70px; 
+            padding: 10px;
+            textarea{
+                width:100%; 
+                outline: none;
+                resize: none;
+            }
+        }
+    }
+}
