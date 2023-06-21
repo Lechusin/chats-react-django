@@ -8,6 +8,7 @@ export const Login = () => {
   const logIn= (event) =>{
     event.preventDefault();
     console.log("Entro")
+    // validacion de credenciales
     navigate("/home")
   }
   return (

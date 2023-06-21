@@ -9,8 +9,7 @@
             width: 100%;
             form{
                 height: 50%;
-                width: 80%; 
-                
+                width: 80%;                 
             }
         }
     }
@@ -26,14 +25,12 @@
 
     .sidebar{
         flex: 1;
-
         .navbar{
 
             .logo{
                 color: white;
             }
         }
-
         .search{
             .searchForm{
                 input{
@@ -42,7 +39,6 @@
                 }
             }
         }
-
         .chats{
             .userChat{
                 width: 100%; 
@@ -64,7 +60,6 @@
                 }
             }
         }
-
         .input{
             height: 70px; 
             padding: 10px;

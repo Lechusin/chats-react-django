@@ -7,8 +7,10 @@ export const Register = () => {
   const navigate = useNavigate();
   const handleSubmit= (event) =>{
     event.preventDefault();
+    // aqui la verificacion
     console.log("Entro")
     navigate("/login")
+
   }
   return (
     <div className='forma d-flex align-items-center justify-content-center bg-secondary'>
