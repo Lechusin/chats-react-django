@@ -1,4 +1,4 @@
-from sqlalchemy import Table, Column, func
+""" from sqlalchemy import Table, Column, func
 from sqlalchemy.sql.sqltypes import Integer, String, DateTime
 from config.db import meta, engine
 
@@ -17,3 +17,4 @@ users = Table(
 
 # # Crear la tabla en la base de datos
 meta.create_all(engine) #Crea la tabla en la base de datos
+ """

@@ -1,4 +1,11 @@
-from sqlalchemy import create_engine
+import aio_pika
+
+async def connect_rabbitmq(user, password, host):
+    connection = await aio_pika.connect_robust(
+        "amqp://"+user+":"+password+"@"+host+"/",  # URL de conexión de RabbitMQ
+    )
+    return connection
+""" from sqlalchemy import create_engine
 from sqlalchemy import MetaData
 from sqlalchemy import DDL
 from sqlalchemy.orm import sessionmaker
@@ -22,3 +29,4 @@ conn = SessionLocal()  # Se encarga de las transacciones de la base de datos
 meta = MetaData()  # Se encarga de las transacciones de la base de datos
 
 
+ """

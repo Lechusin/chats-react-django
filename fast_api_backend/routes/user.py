@@ -1,18 +1,20 @@
 from fastapi import APIRouter
-from config.db import conn
-from models.user import users
-from schemas.user import UserCreate, UserUpdate,UserGet
-from sqlalchemy.exc import SQLAlchemyError
-from fastapi.responses import JSONResponse
+# from config.db import conn
+# from models.user import users
+# from schemas.user import UserCreate, UserUpdate,UserGet
+#from sqlalchemy.exc import SQLAlchemyError
+# from fastapi.responses import JSONResponse
 
 user = APIRouter()
 
 
 @user.get("/", tags=["Inicio"])
 def read_root():
-    return {"message": "Bienvenido a FastAPI + MySQL"}
+    return {"message": "Bienvenido a Backend FastAPI + RabbitMQ"}
 
-# Obtener todos los usuarios
+
+
+""" # Obtener todos los usuarios
 @user.get("/user", response_model=list[UserGet], tags=["Usuarios"])
 def get_users():
     try:
@@ -75,3 +77,4 @@ def update_user(user_id: int, user: UserUpdate):
         return {"message": "Usuario actualizado correctamente."}
     except SQLAlchemyError as e:
         return {"message": "Se ha producido un error durante la actualización del usuario."}
+ """

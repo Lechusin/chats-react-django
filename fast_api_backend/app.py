@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from config.db import connect_rabbitmq
 from routes.user import user
 #from fastapi.middleware.cors import CORSMiddleware
 
@@ -23,5 +24,9 @@ origins = [
 # )
 
 # Agregar las rutas definidas en el módulo 'user' al objeto FastAPI
-#app.include_router(user)
+app.include_router(user)
+
+@app.on_event("startup")
+async def startup_event():
+    app.state.rabbitmq_connection = await connect_rabbitmq("guest","guest","localhost")
     
