@@ -1,20 +1,26 @@
-import React from 'react'
+import React from 'react';
+import { GeneralContext } from '../context';
 
 export const Chats = () => {
+  const { chats, setChats, setActualChat } = React.useContext(GeneralContext);
+
   return (
     <div className='chats p-1'>
-      <div className="userChat d-flex align-items-center justify-content-center btn btn-primary">
-        <div className="userChatInfo">
-          <span>Mateo</span>
-        </div>
-      </div>
-      <div className="userChat d-flex align-items-center justify-content-center btn btn-primary" >
-        <div className="userChatInfo">
-          <span>Juan</span>
-        </div>
-      </div>
-      
+      {
+        chats ? (
+          chats.map((chat) => (
+            <div className="userChat d-flex align-items-center justify-content-center btn btn-primary" key={chat.usuario} onClick={()=>setActualChat(chat)}>
+              <div className="userChatInfo">
+                <span>{chat.usuario}</span>
+              </div>
+            </div>
+          ))
+        ): (
+          <></>
+        )
+        
+      }
     </div>
-    
+
   )
 }

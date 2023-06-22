@@ -1,15 +1,18 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.css';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import '../styles/Styles.scss';
 
 export const Login = () => {
   const navigate = useNavigate();
+  const [err, setErr] = React.useState(false);
+  const [user, setUser] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const logIn= (event) =>{
     event.preventDefault();
-    console.log("Entro")
     // validacion de credenciales
-    navigate("/home")
+    setErr(true);
+    navigate(`/home/${user}`);
   }
   return (
     <div className='forma d-flex align-items-center justify-content-center bg-secondary'>
@@ -21,17 +24,31 @@ export const Login = () => {
               
                 <div className="mb-2">
                   <label className="fw-bold text-white form-label">Usuario:</label>
-                  <input type="text" placeholder='Escriba su usuario...' className="form-control"/>
+                  <input type="text" 
+                    placeholder='Escriba su usuario...' 
+                    className="form-control"
+                    value={user}
+                    onChange={(e) => setUser(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-1">
+                  <label className="fw-bold text-white form-label">Contraseña:</label>
+                  <input type="password" 
+                    placeholder='Escriba su contraseña...' 
+                    className="form-control"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
                 </div>
                 <div className="mb-2">
-                  <label className="fw-bold text-white form-label">Contraseña:</label>
-                  <input type="password" placeholder='Escriba su contraseña...' className="form-control"/>
+                  {err && <div className='alert alert-danger p-1 mb-1'>Sus credenciales son incorrectas </div>}
                 </div>
-                
                 <button type="submit" className="btn btn-dark">Ingresar</button>  
               </form>
-              <div className="d-flex p-1 text-white form-text">
-                <p>No tienes una cuenta</p> <button className='btn btn-link text-white' onClick={() => navigate("/register")}>Registrarse</button>
+              <div className="d-flex text-white">
+                <p className='p-1'>No tienes una cuenta </p> <Link className='text-white p-1' to={"/register"}> Registrarse </Link> 
               </div>
             </div>
         </div>
