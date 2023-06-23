@@ -30,3 +30,4 @@ app.include_router(user)
 async def startup_event():
     app.state.rabbitmq_connection = await connect_rabbitmq("guest","guest","localhost")
     
+    
