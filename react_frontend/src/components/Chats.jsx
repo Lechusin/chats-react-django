@@ -16,7 +16,7 @@ export const Chats = () => {
             </div>
           ))
         ): (
-          <></>
+          <div></div>
         )
         
       }

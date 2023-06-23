@@ -94,7 +94,7 @@ function GeneralProvider(props) {
     const agregarMensaje = (usuario, mensajeNuevo) => {
         let auxChats = [...chats];
         let actualMensajes = auxChats.find(function (chatAux) {
-            return chatAux.usuario == usuario
+            return chatAux.usuario === usuario
         })
         let auxMensajes = [...actualMensajes.mensajes]
         auxMensajes.push({
@@ -102,7 +102,7 @@ function GeneralProvider(props) {
             tipo: "e"
         })
         auxChats.map(function (chat) {
-            if (chat.usuario == usuario) {
+            if (chat.usuario === usuario) {
                 chat.mensajes = auxMensajes
             }
             return chat
