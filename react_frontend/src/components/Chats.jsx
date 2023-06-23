@@ -2,7 +2,7 @@ import React from 'react';
 import { GeneralContext } from '../context';
 
 export const Chats = () => {
-  const { chats, setChats, setActualChat } = React.useContext(GeneralContext);
+  const { chats, setActualChat } = React.useContext(GeneralContext);
 
   return (
     <div className='chats p-1'>
