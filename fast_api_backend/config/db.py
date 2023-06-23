@@ -1,10 +1,28 @@
 import aio_pika
 
-async def connect_rabbitmq(user, password, host):
+async def connect_rabbitmq(user: str , password: str, host: str):
     connection = await aio_pika.connect_robust(
         "amqp://"+user+":"+password+"@"+host+"/",  # URL de conexión de RabbitMQ
     )
     return connection
+
+async def create_rabbitmq_user(username: str, password: str, host: str):
+    connection = await connect_rabbitmq("guest", "guest", host)
+
+    async with connection:
+        channel = await connection.channel()
+        await channel.set_qos(prefetch_count=1)
+
+        # Crea el usuario en RabbitMQ
+        exchange = await channel.declare_exchange("create_user_exchange", durable=True)
+        await exchange.publish(
+            aio_pika.Message(
+                body=f"{username}:{password}".encode(),
+                delivery_mode=aio_pika.DeliveryMode.PERSISTENT
+            ),
+            routing_key="create_user_queue"
+        )
+
 """ from sqlalchemy import create_engine
 from sqlalchemy import MetaData
 from sqlalchemy import DDL

@@ -1,3 +1,4 @@
+from config.db import create_rabbitmq_user
 from fastapi import APIRouter
 # from config.db import conn
 # from models.user import users
@@ -12,7 +13,11 @@ user = APIRouter()
 def read_root():
     return {"message": "Bienvenido a Backend FastAPI + RabbitMQ"}
 
-
+@user.post("/users")
+async def create_user(username: str, password: str, host: str):
+    # Crea el usuario en RabbitMQ
+    await create_rabbitmq_user(username, password, host)
+    return {"message": "Usuario creado exitosamente"}
 
 """ # Obtener todos los usuarios
 @user.get("/user", response_model=list[UserGet], tags=["Usuarios"])
