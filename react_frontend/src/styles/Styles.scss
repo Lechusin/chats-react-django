@@ -10,7 +10,7 @@ $primary:       #075E54;
 // Importa los archivos de Bootstrap después de sobrescribir las variables
 @import "~bootstrap/scss/bootstrap";
 
-
+// diseños personalizados
   @mixin tablet {
     @media screen and (max-width: 825px) {
       @content;
