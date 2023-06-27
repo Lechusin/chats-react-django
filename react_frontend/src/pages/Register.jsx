@@ -1,5 +1,5 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.css';
+//import 'bootstrap/dist/css/bootstrap.css';
 import {Link, useNavigate} from "react-router-dom";
 import '../styles/Styles.scss';
 
@@ -27,8 +27,8 @@ export const Register = () => {
 
   }
   return (
-    <div className='forma d-flex align-items-center justify-content-center bg-secondary'>
-        <div className="cont overflow-hidden d-flex border  rounded-4" >
+    <div className='forma d-flex align-items-start justify-content-center bg-secondary'>
+        <div className="cont overflow-hidden d-flex border mt-4 rounded-4" >
             <div className=" d-flex flex-column align-items-center fromWrapper bg-primary">
               <span className='logo text-white fw-bold fs-1'>SisDis G4</span>
               <span className='title text-white fw-bold fs-4'>Registrar </span>

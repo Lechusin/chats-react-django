@@ -1,4 +1,22 @@
+$primary:       #075E54;
+//$secondary:     #FFFFFF;
+//$success:       ;
+//$info:          ;
+//$warning:       ;
+//$danger:        ;
+//$light:         #afafaf;
+//$dark:          #333333;
 
+// Importa los archivos de Bootstrap después de sobrescribir las variables
+@import "~bootstrap/scss/bootstrap";
+
+
+  @mixin tablet {
+    @media screen and (max-width: 825px) {
+      @content;
+    }
+  }
+  
 .forma{
     height: 100vh;
     .cont{
@@ -19,17 +37,25 @@
 .home {
     height: 100vh;
     .cont{
-        height: 95%; 
-        width: 95%; 
+        height: 90%; 
+        width: 90%; 
+        @include tablet {
+            width: 95%;
+           }
     }
 
     .sidebar{
         flex: 1;
+        
         .navbar{
-
+            height: 40px; 
+            padding:10px;
             .logo{
-                color: white;
+                @include tablet {
+                    display: none;
+                  }
             }
+
         }
         .search{
             .searchForm{

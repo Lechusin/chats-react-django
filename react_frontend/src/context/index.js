@@ -2,7 +2,6 @@ import React from 'react';
 //esto esta en veremos "npm i amqplib"
 const GeneralContext = React.createContext();
 function GeneralProvider(props) {
-    const [rabbitUsers, setRabbitUser] = React.useState([]);
     const dbSimulator = sessionStorage.getItem("chats");
     const [chats, setChats] = React.useState(JSON.parse(dbSimulator) ? JSON.parse(dbSimulator) : [{
         usuario: "Mateo",
@@ -112,8 +111,6 @@ function GeneralProvider(props) {
     }
     return (
         <GeneralContext.Provider value={{
-            rabbitUsers,
-            setRabbitUser,
             actualChat,
             setActualChat,
             chats,
