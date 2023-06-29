@@ -14,7 +14,6 @@ function App() {
           <Route path="/home/:user" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-
         </Routes>
       </GeneralProvider>
     </BrowserRouter>

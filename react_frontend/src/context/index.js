@@ -4,7 +4,20 @@ const GeneralContext = React.createContext();
 function GeneralProvider(props) {
     const dbSimulator = sessionStorage.getItem("chats");
     const [chats, setChats] = React.useState(JSON.parse(dbSimulator) ? JSON.parse(dbSimulator) : [{
-        usuario: "Mateo",
+        usuario: "User2",
+        mensajes: [
+        ]
+    },
+    {
+        usuario: "User3",
+        mensajes: [
+        ]
+    }]);
+    const [ws_send,setWsSend]=React.useState()
+    const [ws_receive,setWsReceive]=React.useState()
+    
+    /*const [chats, setChats] = React.useState(JSON.parse(dbSimulator) ? JSON.parse(dbSimulator) : [{
+        usuario: "Mateo2",
         mensajes: [
             {
                 mensaje: "Hola",
@@ -44,7 +57,7 @@ function GeneralProvider(props) {
                 tipo: "r"
             }
         ]
-    }]);
+    }]);*/
     // const [chats, setChats] = React.useState([
     //     {
     //         usuario: "Mateo",
@@ -90,7 +103,7 @@ function GeneralProvider(props) {
     //     }
     // ])
     const [actualChat, setActualChat] = React.useState({})
-    const agregarMensaje = (usuario, mensajeNuevo) => {
+    const agregarMensaje = (usuario, mensajeNuevo,tipo="e") => {
         let auxChats = [...chats];
         let actualMensajes = auxChats.find(function (chatAux) {
             return chatAux.usuario === usuario
@@ -98,7 +111,7 @@ function GeneralProvider(props) {
         let auxMensajes = [...actualMensajes.mensajes]
         auxMensajes.push({
             mensaje: mensajeNuevo,
-            tipo: "e"
+            tipo: tipo
         })
         auxChats.map(function (chat) {
             if (chat.usuario === usuario) {
@@ -115,7 +128,11 @@ function GeneralProvider(props) {
             setActualChat,
             chats,
             setChats,
-            agregarMensaje
+            agregarMensaje,
+            ws_receive,
+            setWsReceive,
+            ws_send,
+            setWsSend
         }}>
             {props.children}
         </GeneralContext.Provider>

@@ -2,22 +2,67 @@ import React from 'react'
 //import 'bootstrap/dist/css/bootstrap.css';
 import {Link, useNavigate} from "react-router-dom";
 import '../styles/Styles.scss';
+import axios from 'axios';
+
+async function addUser(user,pass){
+  const axio = axios.create({baseURL: 'http://127.0.0.1:8000'});
+  try{
+    const response = await axio.post('/register',{name:user,password:pass});
+    //console.log('response data  ', response.data)
+    return response.data;
+  }
+  catch(e){
+    return null;
+  }
+} 
+
+async function isUser(user){
+  const axio = axios.create({baseURL: 'http://127.0.0.1:8000'});
+  try{
+    const response = await axio.get(`/mgdb/is-user/${user}`);
+    console.log('response data  ', response.data)
+    return response.data;
+  }
+  catch(e){
+    return null;
+  }
+}
+
 
 export const Register = () => {
   const [err, setErr] = React.useState(false);
   const [err1, setErr1] = React.useState(false);
+  const [err2, setErr2] = React.useState(false);
   const [user, setUser] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [passwordR, setPasswordR] = React.useState("");
   const navigate = useNavigate();
-  const handleSubmit= (event) =>{
+  const handleSubmit= async (event) =>{
     event.preventDefault();
     // aqui la verificacion
     if (!(user === "1")){
       setErr(false);
       if (password === passwordR) {
         setErr1(false);
-        navigate("/login");
+        //Comprobacion nombre de usuario
+        const res=await isUser(user);
+        if(res==null){//Error Server
+          setErr2(true)
+        }
+        else if(!res){//usuario disponible
+          setErr2(false)
+          const id=await addUser(user,password)
+          if (id==null) {//error en el server
+            setErr2(true);
+          }
+          else{//Registrador y logeado
+            setErr(false)
+            setErr2(false);
+            navigate(`/home/${user}`);
+          }
+        }
+        setErr(true);
+        
       } else{        
         setErr1(true);
       }
@@ -69,6 +114,7 @@ export const Register = () => {
               <div className="mb-2">
                 {err && <div className='alert alert-danger p-1 mb-1'>El usuario ya existe</div>}
                 {err1 && <div className='alert alert-danger p-1 mb-1'>Su contraseña no coincide </div>}
+                {err2 && <div className='alert alert-danger p-1 mb-1'>Error en el servidor, intentelo luego </div>}
               </div>
               <button type="submit" className="btn btn-dark">Registrar</button>  
               </form>

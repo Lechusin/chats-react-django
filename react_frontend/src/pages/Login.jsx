@@ -1,18 +1,61 @@
 import React from 'react'
 //import 'bootstrap/dist/css/bootstrap.css';
 import {Link, useNavigate} from "react-router-dom";
+import { GeneralContext } from '../context'
 import '../styles/Styles.scss';
+import axios from 'axios';
+async function getUser(user,pass){
+  const axio = axios.create({baseURL: 'http://127.0.0.1:8000'});
+  try{
+    const response = await axio.post('/login',{name:user,password:pass});
+    //console.log('response data  ', response.data)
+    return response.data;
+  }
+  catch(e){
+    return null;
+  }
+}
+
+async function getChats(user){
+  const axio = axios.create({baseURL: 'http://127.0.0.1:8000'});
+  try{
+    const response = await axio.get(`/mgdb/chats/${user}`);
+    //console.log('response data  ', response.data)
+    return response.data;
+  }
+  catch(e){
+    return null;
+  }
+} 
 
 export const Login = () => {
+  
   const navigate = useNavigate();
   const [err, setErr] = React.useState(false);
   const [user, setUser] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const logIn= (event) =>{
+  const {setWsReceive,setWsSend,setChats} = React.useContext(GeneralContext);
+
+  const logIn= async (event) =>{
     event.preventDefault();
     // validacion de credenciales
-    setErr(true);
-    navigate(`/home/${user}`);
+    try{
+      const id=await getUser(user,password)
+      if (id==null) {
+        setErr(true);
+      }
+      else{
+        setErr(false)
+        setWsReceive( new WebSocket(`ws://127.0.0.1:8000/ws/receive/${user}`))
+        setWsSend(new WebSocket(`ws://127.0.0.1:8000/ws/send/${user}`))
+        setChats(await getChats(user));
+        navigate(`/home/${user}`);
+      }
+    }
+    catch(e){
+      setErr(false)
+    }
+    
   }
   return (
     <div className='forma d-flex align-items-start  justify-content-center bg-secondary'>
